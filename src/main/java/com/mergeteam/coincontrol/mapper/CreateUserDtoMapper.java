@@ -1,6 +1,6 @@
 package com.mergeteam.coincontrol.mapper;
 
-import com.mergeteam.coincontrol.dto.CreateUserDto;
+import com.mergeteam.coincontrol.dto.user.CreateUserDto;
 import com.mergeteam.coincontrol.entity.User;
 import org.mapstruct.*;
 import org.springframework.beans.factory.annotation.Autowired;

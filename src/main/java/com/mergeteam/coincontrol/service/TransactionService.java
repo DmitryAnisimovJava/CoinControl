@@ -1,7 +1,7 @@
 package com.mergeteam.coincontrol.service;
 
-import com.mergeteam.coincontrol.dto.ReadExpenseTransactionDto;
-import com.mergeteam.coincontrol.dto.ReadIncomeTransactionDto;
+import com.mergeteam.coincontrol.dto.transaction.ReadExpenseTransactionDto;
+import com.mergeteam.coincontrol.dto.transaction.ReadIncomeTransactionDto;
 import com.mergeteam.coincontrol.entity.Wallet;
 import com.mergeteam.coincontrol.mapper.ReadExpenseTransactionMapper;
 import com.mergeteam.coincontrol.mapper.ReadIncomeTransactionMapper;

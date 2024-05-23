@@ -1,9 +1,9 @@
 package com.mergeteam.coincontrol.api;
 
-import com.mergeteam.coincontrol.dto.CreateUserDto;
-import com.mergeteam.coincontrol.dto.ReadUserDto;
-import com.mergeteam.coincontrol.dto.UpdateUserDto;
-import com.mergeteam.coincontrol.dto.WalletDto;
+import com.mergeteam.coincontrol.dto.user.CreateUserDto;
+import com.mergeteam.coincontrol.dto.user.ReadUserDto;
+import com.mergeteam.coincontrol.dto.user.UpdateUserDto;
+import com.mergeteam.coincontrol.dto.wallet.WalletDto;
 import com.mergeteam.coincontrol.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -18,7 +18,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UserRestController {
 
-    private UserService userService;
+    private final UserService userService;
 
     @GetMapping("/{id}/wallets")
     public Page<WalletDto> getAllWalletsByUserId(@PathVariable UUID id, Pageable pageable) {

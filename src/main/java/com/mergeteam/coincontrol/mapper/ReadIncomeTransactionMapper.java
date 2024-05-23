@@ -1,14 +1,11 @@
 package com.mergeteam.coincontrol.mapper;
 
-import com.mergeteam.coincontrol.dto.ReadExpenseTransactionDto;
-import com.mergeteam.coincontrol.dto.ReadIncomeTransactionDto;
-import com.mergeteam.coincontrol.entity.ExpenseTransaction;
+import com.mergeteam.coincontrol.dto.transaction.ReadIncomeTransactionDto;
 import com.mergeteam.coincontrol.entity.IncomeTransaction;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.NullValueCheckStrategy;
-import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring",nullValueCheckStrategy = NullValueCheckStrategy.ON_IMPLICIT_CONVERSION)
 public interface ReadIncomeTransactionMapper {

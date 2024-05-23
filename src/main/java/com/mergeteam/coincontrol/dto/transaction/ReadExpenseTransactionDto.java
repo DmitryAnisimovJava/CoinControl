@@ -1,4 +1,4 @@
-package com.mergeteam.coincontrol.dto;
+package com.mergeteam.coincontrol.dto.transaction;
 
 import com.mergeteam.coincontrol.entity.enums.ExpenseCategory;
 import lombok.Builder;

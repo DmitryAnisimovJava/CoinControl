@@ -1,10 +1,9 @@
 package com.mergeteam.coincontrol.integration.service;
 
-import com.mergeteam.coincontrol.dto.ReadExpenseTransactionDto;
-import com.mergeteam.coincontrol.dto.ReadIncomeTransactionDto;
+import com.mergeteam.coincontrol.dto.transaction.ReadExpenseTransactionDto;
+import com.mergeteam.coincontrol.dto.transaction.ReadIncomeTransactionDto;
 import com.mergeteam.coincontrol.integration.IntegrationBaseClass;
 import com.mergeteam.coincontrol.service.TransactionService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Page;

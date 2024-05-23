@@ -1,13 +1,10 @@
 package com.mergeteam.coincontrol.api;
 
-import com.mergeteam.coincontrol.dto.WalletDto;
-import com.mergeteam.coincontrol.entity.User;
+import com.mergeteam.coincontrol.dto.wallet.WalletDto;
 import com.mergeteam.coincontrol.entity.Wallet;
 import com.mergeteam.coincontrol.service.WalletService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;

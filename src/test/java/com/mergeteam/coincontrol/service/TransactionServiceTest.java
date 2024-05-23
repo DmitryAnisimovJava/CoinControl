@@ -1,7 +1,7 @@
 package com.mergeteam.coincontrol.service;
 
-import com.mergeteam.coincontrol.dto.ReadExpenseTransactionDto;
-import com.mergeteam.coincontrol.dto.ReadIncomeTransactionDto;
+import com.mergeteam.coincontrol.dto.transaction.ReadExpenseTransactionDto;
+import com.mergeteam.coincontrol.dto.transaction.ReadIncomeTransactionDto;
 import com.mergeteam.coincontrol.entity.ExpenseTransaction;
 import com.mergeteam.coincontrol.entity.IncomeTransaction;
 import com.mergeteam.coincontrol.entity.Wallet;
@@ -23,7 +23,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;

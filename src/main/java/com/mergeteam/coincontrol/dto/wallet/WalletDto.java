@@ -1,4 +1,4 @@
-package com.mergeteam.coincontrol.dto;
+package com.mergeteam.coincontrol.dto.wallet;
 
 import lombok.Builder;
 import lombok.Value;

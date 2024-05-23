@@ -1,7 +1,6 @@
 package com.mergeteam.coincontrol.mapper;
 
-import com.mergeteam.coincontrol.dto.ReadExpenseTransactionDto;
-import com.mergeteam.coincontrol.dto.ReadUserDto;
+import com.mergeteam.coincontrol.dto.user.ReadUserDto;
 import com.mergeteam.coincontrol.entity.User;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;

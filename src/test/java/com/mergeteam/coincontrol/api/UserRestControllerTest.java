@@ -1,6 +1,6 @@
 package com.mergeteam.coincontrol.api;
 
-import com.mergeteam.coincontrol.dto.WalletDto;
+import com.mergeteam.coincontrol.dto.wallet.WalletDto;
 import com.mergeteam.coincontrol.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,8 +1,8 @@
 package com.mergeteam.coincontrol.api;
 
 import com.mergeteam.coincontrol.api.sort.TransactionSort;
-import com.mergeteam.coincontrol.dto.ReadExpenseTransactionDto;
-import com.mergeteam.coincontrol.dto.ReadIncomeTransactionDto;
+import com.mergeteam.coincontrol.dto.transaction.ReadExpenseTransactionDto;
+import com.mergeteam.coincontrol.dto.transaction.ReadIncomeTransactionDto;
 import com.mergeteam.coincontrol.response.BaseResponse;
 import com.mergeteam.coincontrol.response.PageResponse;
 import com.mergeteam.coincontrol.service.TransactionService;

@@ -1,4 +1,4 @@
-package com.mergeteam.coincontrol.dto;
+package com.mergeteam.coincontrol.dto.user;
 
 import com.mergeteam.coincontrol.entity.enums.Role;
 import lombok.Builder;

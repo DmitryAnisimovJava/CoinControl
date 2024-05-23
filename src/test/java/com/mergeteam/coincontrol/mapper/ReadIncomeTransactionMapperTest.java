@@ -1,14 +1,10 @@
 package com.mergeteam.coincontrol.mapper;
 
-import com.mergeteam.coincontrol.dto.ReadExpenseTransactionDto;
-import com.mergeteam.coincontrol.dto.ReadIncomeTransactionDto;
-import com.mergeteam.coincontrol.entity.ExpenseTransaction;
+import com.mergeteam.coincontrol.dto.transaction.ReadIncomeTransactionDto;
 import com.mergeteam.coincontrol.entity.IncomeTransaction;
 import com.mergeteam.coincontrol.entity.Wallet;
-import com.mergeteam.coincontrol.entity.enums.ExpenseCategory;
 import com.mergeteam.coincontrol.entity.enums.IncomeCategory;
 import com.mergeteam.coincontrol.utils.TestTags;
-import lombok.AllArgsConstructor;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

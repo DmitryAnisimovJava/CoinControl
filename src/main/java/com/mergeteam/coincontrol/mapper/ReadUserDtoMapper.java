@@ -1,6 +1,6 @@
 package com.mergeteam.coincontrol.mapper;
 
-import com.mergeteam.coincontrol.dto.ReadUserDto;
+import com.mergeteam.coincontrol.dto.user.ReadUserDto;
 import com.mergeteam.coincontrol.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

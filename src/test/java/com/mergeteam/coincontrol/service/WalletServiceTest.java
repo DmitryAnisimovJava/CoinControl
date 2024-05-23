@@ -1,6 +1,5 @@
 package com.mergeteam.coincontrol.service;
 
-import com.mergeteam.coincontrol.dto.WalletDto;
 import com.mergeteam.coincontrol.entity.User;
 import com.mergeteam.coincontrol.entity.Wallet;
 import com.mergeteam.coincontrol.repository.ExpenseTransactionRepository;
@@ -15,11 +14,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @RequiredArgsConstructor
 @ExtendWith(MockitoExtension.class)

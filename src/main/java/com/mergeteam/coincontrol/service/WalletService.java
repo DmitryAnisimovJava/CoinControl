@@ -1,7 +1,6 @@
 package com.mergeteam.coincontrol.service;
 
-import com.mergeteam.coincontrol.dto.WalletDto;
-import com.mergeteam.coincontrol.entity.ExpenseTransaction;
+import com.mergeteam.coincontrol.dto.wallet.WalletDto;
 import com.mergeteam.coincontrol.entity.User;
 import com.mergeteam.coincontrol.entity.Wallet;
 import com.mergeteam.coincontrol.repository.ExpenseTransactionRepository;
@@ -9,7 +8,6 @@ import com.mergeteam.coincontrol.repository.IncomeTransactionRepository;
 import com.mergeteam.coincontrol.repository.UserRepository;
 import com.mergeteam.coincontrol.repository.WalletRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;

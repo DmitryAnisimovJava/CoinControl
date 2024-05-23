@@ -1,8 +1,8 @@
 package com.mergeteam.coincontrol.service;
 
-import com.mergeteam.coincontrol.dto.CreateUserDto;
-import com.mergeteam.coincontrol.dto.ReadUserDto;
-import com.mergeteam.coincontrol.dto.WalletDto;
+import com.mergeteam.coincontrol.dto.user.CreateUserDto;
+import com.mergeteam.coincontrol.dto.user.ReadUserDto;
+import com.mergeteam.coincontrol.dto.wallet.WalletDto;
 import com.mergeteam.coincontrol.entity.User;
 import com.mergeteam.coincontrol.entity.Wallet;
 import com.mergeteam.coincontrol.entity.enums.Role;

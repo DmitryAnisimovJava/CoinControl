@@ -1,9 +1,9 @@
 package com.mergeteam.coincontrol.service;
 
-import com.mergeteam.coincontrol.dto.CreateUserDto;
-import com.mergeteam.coincontrol.dto.ReadUserDto;
-import com.mergeteam.coincontrol.dto.UpdateUserDto;
-import com.mergeteam.coincontrol.dto.WalletDto;
+import com.mergeteam.coincontrol.dto.user.CreateUserDto;
+import com.mergeteam.coincontrol.dto.user.ReadUserDto;
+import com.mergeteam.coincontrol.dto.user.UpdateUserDto;
+import com.mergeteam.coincontrol.dto.wallet.WalletDto;
 import com.mergeteam.coincontrol.entity.User;
 import com.mergeteam.coincontrol.mapper.CreateUserDtoMapper;
 import com.mergeteam.coincontrol.mapper.ReadUserDtoMapper;
@@ -29,7 +29,7 @@ public class UserService implements UserDetailsService {
 
     private final CreateUserDtoMapper createUserDtoMapper;
     ReadUserDtoMapper readUserDtoMapper = ReadUserDtoMapper.INSTANCE;
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public ReadUserDto findById(UUID id) {
         Optional<User> optionalUser = userRepository.findById(id);
@@ -92,7 +92,7 @@ public class UserService implements UserDetailsService {
                         user.getPassword(),
                         Collections.singleton(user.getRole())
                 ))
-                .orElseThrow(() -> new UsernameNotFoundException("Failed to retrieve user: " + username));
+                .orElseThrow(UserNotFoundException::new);
     }
 
 }
