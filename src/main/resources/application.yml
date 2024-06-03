@@ -8,3 +8,11 @@ spring:
     url: jdbc:postgresql://${DB_HOST:localhost}:${EXTERNAL_DB_PORT:5432}/coin
   jpa:
     show-sql: true
+logging:
+  level:
+    org.springframework.security: trace
+jwt:
+  cookie-token-key: '{"kty": "oct", "use": "sig", 
+  "k": "TQL2PC0d1oNsWZ4ptrDdqg",
+  "alg": "HS256"}'
+  time-to-live: 6h

@@ -1,19 +1,29 @@
 package com.mergeteam.coincontrol.security;
 
+import com.mergeteam.coincontrol.security.rest.RestAuthenticationConfigurer;
+import com.mergeteam.coincontrol.security.token.*;
 import com.mergeteam.coincontrol.service.LoginService;
-import com.mergeteam.coincontrol.service.UserService;
+import com.nimbusds.jose.KeyLengthException;
+import com.nimbusds.jose.crypto.DirectDecrypter;
+import com.nimbusds.jose.crypto.DirectEncrypter;
+import com.nimbusds.jose.jwk.OctetSequenceKey;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+
+import java.text.ParseException;
+import java.time.Duration;
 
 @Configuration
 @EnableWebSecurity
@@ -24,19 +34,34 @@ public class SecurityConfiguration {
     private static final int BCRYPT_STRENGTH = 12;
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/v3/api-docs/**",
-                                                                    "/swagger-ui/**",
-                                                                    "/swagger-ui.html",
-                                                                    "/api/v1/login",
-                                                                    "/api/v1/id")
-                        .permitAll()
-                        .anyRequest()
-                        .authenticated())
-                .formLogin(AbstractHttpConfigurer::disable)
-                .sessionManagement(sessionManagement ->
-                                           sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+    public SecurityFilterChain securityFilterChain(HttpSecurity http,
+                                                   TokenCookieSessionAuthenticationStrategy tokenCookieSessionAuthenticationStrategy,
+                                                   TokenCookieAuthenticationConfigurer cookieAuthenticationConfigurer,
+                                                   RestAuthenticationConfigurer restAuthenticationConfigurer,
+                                                   @Value("${jwt.time-to-live}") Duration tokenTtl)
+            throws Exception {
+        CookieCsrfTokenRepository cookieCsrfTokenRepository = new CookieCsrfTokenRepository();
+        cookieCsrfTokenRepository.setCookieCustomizer(cookie -> cookie.maxAge(tokenTtl.getSeconds()));
+        http.formLogin(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(authorizeHttpRequests ->
+                                               authorizeHttpRequests
+                                                       .requestMatchers("/api/v1/login",
+                                                                        "/v3/api-docs/**",
+                                                                        "/swagger-ui.html",
+                                                                        "/swagger-ui/**")
+                                                       .permitAll()
+                                                       .anyRequest()
+                                                       .authenticated())
+                .sessionManagement(sessionManagement -> sessionManagement
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                        .sessionAuthenticationStrategy(tokenCookieSessionAuthenticationStrategy))
+                .csrf(csrf -> csrf.csrfTokenRepository(cookieCsrfTokenRepository)
+                        .csrfTokenRequestHandler(new CookieCsrfTokenRequestAttributeHandler())
+                        .sessionAuthenticationStrategy((authentication, request, response) -> {
+                        }));
+
+        http.with(restAuthenticationConfigurer, Customizer.withDefaults());
+        http.with(cookieAuthenticationConfigurer, Customizer.withDefaults());
         return http.build();
     }
 
@@ -47,11 +72,16 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
-        var managerBuilder =
-                http.getSharedObject(AuthenticationManagerBuilder.class);
-        managerBuilder.userDetailsService(loginService).passwordEncoder(passwordEncoder());
-        managerBuilder.parentAuthenticationManager(null);
-        return managerBuilder.build();
+    public TokenFactory<Authentication, Token> authenticationTokenTokenFactory() {
+        return new DefaultCookieTokenFactory();
     }
+
+    @Bean
+    public TokenStringConverter<Token> tokenStringConverter(
+            @Value("${jwt.cookie-token-key}") String tokenCookieKey)
+            throws ParseException, KeyLengthException {
+        return new JweTokenStringConverter(new DirectEncrypter(OctetSequenceKey.parse(tokenCookieKey)),
+                                           new DirectDecrypter(OctetSequenceKey.parse(tokenCookieKey)));
+    }
+
 }

@@ -41,7 +41,7 @@ public class UserRestController {
     }
 
     @PostMapping("/id")
-    public ReadUserDto saveUser(@Validated CreateUserDto createUserDto) {
+    public ReadUserDto saveUser(@Validated @RequestBody CreateUserDto createUserDto) {
         return userService.save(createUserDto);
     }
 

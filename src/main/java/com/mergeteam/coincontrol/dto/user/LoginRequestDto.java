@@ -1,11 +1,16 @@
 package com.mergeteam.coincontrol.dto.user;
 
-import lombok.Builder;
-import lombok.Value;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
 
-@Value
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class LoginRequestDto {
-    String email;
-    String password;
+    @JsonProperty("email")
+    private String email;
+    @JsonProperty("password")
+    private String password;
 }

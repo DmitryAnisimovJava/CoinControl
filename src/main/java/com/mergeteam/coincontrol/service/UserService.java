@@ -10,6 +10,7 @@ import com.mergeteam.coincontrol.mapper.ReadUserDtoMapper;
 import com.mergeteam.coincontrol.repository.UserRepository;
 import com.mergeteam.coincontrol.util.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -25,11 +26,13 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class UserService implements UserDetailsService {
+public class UserService {
 
     private final CreateUserDtoMapper createUserDtoMapper;
     ReadUserDtoMapper readUserDtoMapper = ReadUserDtoMapper.INSTANCE;
+
     private final UserRepository userRepository;
+    private boolean machina;
 
     public ReadUserDto findById(UUID id) {
         Optional<User> optionalUser = userRepository.findById(id);
@@ -83,16 +86,4 @@ public class UserService implements UserDetailsService {
             throw new UserNotFoundException();
         }
     }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByEmail(username)
-                .map(user -> new org.springframework.security.core.userdetails.User(
-                        user.getEmail(),
-                        user.getPassword(),
-                        Collections.singleton(user.getRole())
-                ))
-                .orElseThrow(UserNotFoundException::new);
-    }
-
 }
