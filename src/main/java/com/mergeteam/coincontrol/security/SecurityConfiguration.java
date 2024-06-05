@@ -1,7 +1,9 @@
 package com.mergeteam.coincontrol.security;
 
+import com.mergeteam.coincontrol.repository.BannedUserIpRepository;
 import com.mergeteam.coincontrol.security.rest.RestAuthenticationConfigurer;
 import com.mergeteam.coincontrol.security.token.*;
+import com.mergeteam.coincontrol.security.util.BannedAddressChecker;
 import com.mergeteam.coincontrol.service.LoginService;
 import com.nimbusds.jose.KeyLengthException;
 import com.nimbusds.jose.crypto.DirectDecrypter;
@@ -38,6 +40,7 @@ public class SecurityConfiguration {
                                                    TokenCookieSessionAuthenticationStrategy tokenCookieSessionAuthenticationStrategy,
                                                    TokenCookieAuthenticationConfigurer cookieAuthenticationConfigurer,
                                                    RestAuthenticationConfigurer restAuthenticationConfigurer,
+                                                   BannedAddressChecker bannedAddressChecker,
                                                    @Value("${jwt.time-to-live}") Duration tokenTtl)
             throws Exception {
         CookieCsrfTokenRepository cookieCsrfTokenRepository = new CookieCsrfTokenRepository();
@@ -45,6 +48,7 @@ public class SecurityConfiguration {
         http.formLogin(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorizeHttpRequests ->
                                                authorizeHttpRequests
+                                                       .requestMatchers(bannedAddressChecker).denyAll()
                                                        .requestMatchers("/api/v1/login",
                                                                         "/v3/api-docs/**",
                                                                         "/swagger-ui.html",
