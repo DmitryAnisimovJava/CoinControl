@@ -1,0 +1,6 @@
+POST http://localhost:8081/realms/CoinControl/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+client_id=CoinControlClient&client_secret=TZ6eji72C9Rlz0tw7AaMEY7EN2WZxu5r&username=reddi&password=123&grant_type=password
+
+

@@ -62,7 +62,8 @@ public class SecurityConfiguration {
                 .csrf(csrf -> csrf.csrfTokenRepository(cookieCsrfTokenRepository)
                         .csrfTokenRequestHandler(new CookieCsrfTokenRequestAttributeHandler())
                         .sessionAuthenticationStrategy((authentication, request, response) -> {
-                        }));
+                        }))
+                .oauth2ResourceServer(configurer -> configurer.jwt(Customizer.withDefaults()));
 
         http.with(restAuthenticationConfigurer, Customizer.withDefaults());
         http.with(cookieAuthenticationConfigurer, Customizer.withDefaults());
